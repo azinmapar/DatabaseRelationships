@@ -2,15 +2,17 @@
 
 namespace DatabaseRelationships.Model
 {
-    public class Backpack
+    public class Factions
     {
 
         public int Id { get; set; }
 
-        public String Description { get; set; } = String.Empty;
+        public string Name { get; set; } = String.Empty;
 
         [JsonIgnore]
-        public Character Character { get; set; }
+        public List<Character> Character { get; set; } 
+
+
 
     }
 }

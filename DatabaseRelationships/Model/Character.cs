@@ -1,4 +1,6 @@
-﻿namespace DatabaseRelationships.Model
+﻿using System.Text.Json.Serialization;
+
+namespace DatabaseRelationships.Model
 {
     public class Character
     {
@@ -9,8 +11,10 @@
 
         public int BackpackId { get; set; }
 
-        public Backpack Backpack { get; set; } = new Backpack();
+        public Backpack Backpack { get; set; } 
 
-        public List<Weapon> Weapons { get; set; } = [];
+        public List<Weapon> Weapons { get; set; }
+
+        public List<Factions> Factions { get; set; } 
     }
 }

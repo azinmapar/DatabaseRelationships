@@ -1,4 +1,6 @@
-﻿namespace DatabaseRelationships.Model
+﻿using System.Text.Json.Serialization;
+
+namespace DatabaseRelationships.Model
 {
     public class Weapon
     {
@@ -9,7 +11,8 @@
 
         public int CharacterId { get; set; }
 
-        public Character Character { get; set; } = new Character();
+        [JsonIgnore]
+        public Character Character { get; set; }
 
     }
 }

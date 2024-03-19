@@ -3,6 +3,7 @@ using DatabaseRelationships.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseRelationships.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240318115424_characterWeaponRelationship")]
+    partial class characterWeaponRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,21 +23,6 @@ namespace DatabaseRelationships.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CharacterFactions", b =>
-                {
-                    b.Property<int>("CharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FactionsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CharacterId", "FactionsId");
-
-                    b.HasIndex("FactionsId");
-
-                    b.ToTable("CharacterFactions");
-                });
 
             modelBuilder.Entity("DatabaseRelationships.Model.Backpack", b =>
                 {
@@ -50,7 +38,7 @@ namespace DatabaseRelationships.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Backpacks");
+                    b.ToTable("backpacks");
                 });
 
             modelBuilder.Entity("DatabaseRelationships.Model.Character", b =>
@@ -73,24 +61,7 @@ namespace DatabaseRelationships.Migrations
                     b.HasIndex("BackpackId")
                         .IsUnique();
 
-                    b.ToTable("Characters");
-                });
-
-            modelBuilder.Entity("DatabaseRelationships.Model.Factions", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Factions");
+                    b.ToTable("characters");
                 });
 
             modelBuilder.Entity("DatabaseRelationships.Model.Weapon", b =>
@@ -112,22 +83,7 @@ namespace DatabaseRelationships.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Weapons");
-                });
-
-            modelBuilder.Entity("CharacterFactions", b =>
-                {
-                    b.HasOne("DatabaseRelationships.Model.Character", null)
-                        .WithMany()
-                        .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DatabaseRelationships.Model.Factions", null)
-                        .WithMany()
-                        .HasForeignKey("FactionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("weapons");
                 });
 
             modelBuilder.Entity("DatabaseRelationships.Model.Character", b =>
